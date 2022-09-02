@@ -1,0 +1,25 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/web-platform/data-access/src",
+  "prefix": "launch-darkly",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/web-platform/data-access"],
+      "options": {
+        "jestConfig": "libs/web-platform/data-access/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/web-platform/data-access/**/*.ts",
+          "libs/web-platform/data-access/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

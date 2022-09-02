@@ -5,6 +5,7 @@
     "any-shared-secrets": "libs/any-shared/secrets",
     "api-interfaces": "libs/api-interfaces",
     "demo": "apps/demo",
-    "demo-e2e": "apps/demo-e2e"
+    "demo-e2e": "apps/demo-e2e",
+    "web-platform-data-access": "libs/web-platform/data-access"
   }
 }

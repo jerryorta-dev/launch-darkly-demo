@@ -8,7 +8,7 @@
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test",
-    "secrets": "bash scripts/secrets.sh gigasoftware-secrets-private"
+    "secrets": "bash scripts/secrets.sh launch-darkly-secrets-private"
   },
   "private": true,
   "dependencies": {

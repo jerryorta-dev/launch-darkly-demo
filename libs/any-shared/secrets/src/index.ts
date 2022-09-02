@@ -1,1 +1,1 @@
-export * from './lib/any-shared-secrets.module';
+export * from './lib/index';

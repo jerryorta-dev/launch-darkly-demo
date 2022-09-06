@@ -4,20 +4,29 @@
 
 - [Launch Darkly Admin](https://app.launchdarkly.com/default/test/features)
 
-## Local Environment
+See UI hosted at https://launch-darkly-demo.web.app/
+
+
+### Local Environment
 
 Clone this repo, along with the secrets repo `https://github.com/jerryorta-dev/launch-darkly-secrets-private` as a sibling to this repo ( if you have access ). In this repo, run `npm run secrets` to copy the secrets to the nx library  
 `libs/any-shared/secrets/src/lib`. Then you can run the local server ( see below ).
 
 If you need to create a secrets repo, follow this [template repo](https://github.com/jerryorta-dev/launch-darkly-secrets-private-template)
 
-## Run Development server to load Launch Darkly `Test` environment feature flags
+### Run Development server to load Launch Darkly `Test` environment feature flags
 
 Run `npx nx serve demo` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
 
-## Run Production server to load Launch Darkly `Production` environment feature flags
+### Run Production server to load Launch Darkly `Production` environment feature flags
 
 Run `npx nx serve demo --prod` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
+
+### Deploy to firebase
+
+Only production is configured for deployment. 
+
+Run in console: `npm run d.demo.prd`
 
 ## Architecture
 

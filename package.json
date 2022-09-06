@@ -8,6 +8,7 @@
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test",
+    "d.demo.prd": "bash scripts/deploy.demo.prd.sh",
     "secrets": "bash scripts/secrets.sh launch-darkly-secrets-private"
   },
   "private": true,

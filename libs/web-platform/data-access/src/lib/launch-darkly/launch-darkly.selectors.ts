@@ -16,7 +16,6 @@ export const selectBooleanFeatureFlag = (featureFlag: string) =>
   createSelector(
     selectLaunchDarklyState,
     (state: LDFlagSet): BooleanFeatureFlag => {
-      console.log(state);
       if (
         (state && state[featureFlag] !== null) ||
         state[featureFlag] !== undefined

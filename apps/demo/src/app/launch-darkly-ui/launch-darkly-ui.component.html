@@ -1,0 +1,9 @@
+<mat-card>
+  <mat-card-title>No Feature flag</mat-card-title>
+  <mat-card-content> This card has NO feature flag. </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="showBooleanFlag$ | ngrxPush">
+  <mat-card-title>Boolean Feature flag</mat-card-title>
+  <mat-card-content>Toggled ON in Launch Darkly</mat-card-content>
+</mat-card>

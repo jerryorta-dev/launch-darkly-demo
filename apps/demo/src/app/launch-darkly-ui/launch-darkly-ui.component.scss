@@ -1,0 +1,14 @@
+:host {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 20px;
+
+  mat-card {
+    mat-card-content {
+      text-align: center;
+      padding: 20px 0;
+    }
+  }
+}

@@ -1,5 +1,5 @@
-import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EffectsModule } from '@ngrx/effects';
@@ -7,22 +7,27 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import {
   LaunchDarklyClientIDToken,
-  LaunchDarklyModule,
+  LaunchDarklyStoreModule,
 } from '@web-platform/data-access';
 import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
-import { NxWelcomeComponent } from './nx-welcome.component';
+import { LaunchDarklyUiModule } from './launch-darkly-ui/launch-darkly-ui.module';
 
 @NgModule({
-  declarations: [AppComponent, NxWelcomeComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    StoreModule.forRoot({}, {}),
+
+    StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
-    LaunchDarklyModule,
+
+    // Launch Darkly
+    LaunchDarklyUiModule,
+    LaunchDarklyStoreModule,
+
+    BrowserAnimationsModule,
+
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: false,
@@ -33,6 +38,8 @@ import { NxWelcomeComponent } from './nx-welcome.component';
       //   persist: true
       // }
     }),
+
+    MatToolbarModule,
   ],
   providers: [
     {

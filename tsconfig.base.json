@@ -16,10 +16,10 @@
     "baseUrl": ".",
     "paths": {
       "@launch-darkly/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@secrets": ["libs/any-shared/secrets/src/index.ts"],
       "@web-platform/data-access": [
         "libs/web-platform/data-access/src/index.ts"
-      ],
-      "@secrets": ["libs/any-shared/secrets/src/index.ts"]
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

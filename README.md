@@ -1,105 +1,52 @@
 
 
-# LaunchDarkly
+# Launch Darkly Demo POC
 
-This project was generated using [Nx](https://nx.dev).
+- [Launch Darkly Admin](https://app.launchdarkly.com/default/test/features)
 
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
+## Local Environment
 
-🔎 **Smart, Fast and Extensible Build System**
+Clone this repo, along with the secrets repo `https://github.com/jerryorta-dev/launch-darkly-secrets-private` as a sibling to this repo ( if you have access ). In this repo, run `npm run secrets` to copy the secrets to the nx library  
+`libs/any-shared/secrets/src/lib`. Then you can run the local server ( see below ).
 
-## Quick Start & Documentation
+If you need to create a secrets repo, follow this [template repo](https://github.com/jerryorta-dev/launch-darkly-secrets-private-template)
 
-[Nx Documentation](https://nx.dev/angular)
+## Run Development server to load Launch Darkly `Test` environment feature flags
 
-[10-minute video showing all Nx features](https://nx.dev/getting-started/intro)
+Run `npx nx serve demo` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
 
-[Interactive Tutorial](https://nx.dev/react-tutorial/01-create-application)
+## Run Production server to load Launch Darkly `Production` environment feature flags
 
-## Adding capabilities to your workspace
+Run `npx nx serve demo --prod` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
 
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
+## Architecture
 
-These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
+This architecture uses NgRX to store all launch darkly feature flags. The Launch Darkly Client SDK  ( see `launchdarkly-js-client-sdk` in the `package.json` ) is wrapped in an Effect, and listens for constant changes. The benefits are:
 
-Below are our core plugins:
+- Changes are updated to the store in real time as changes are made in the Launch Darkly Admin
+- Feature flags may be consumed in the UI as observables from NgRX selectors, Allowing feature flags to be used anywhere:
+  - Components
+  - Services
+  - Route Guards
+  - etc.
 
-- [Angular](https://angular.io)
-  - `ng add @nrwl/angular`
-- [React](https://reactjs.org)
-  - `ng add @nrwl/react`
-- Web (no framework frontends)
-  - `ng add @nrwl/web`
-- [Nest](https://nestjs.com)
-  - `ng add @nrwl/nest`
-- [Express](https://expressjs.com)
-  - `ng add @nrwl/express`
-- [Node](https://nodejs.org)
-  - `ng add @nrwl/node`
+### UI
 
-There are also many [community plugins](https://nx.dev/community) you could add.
+`APP_FEATURE_FLAGS` Enum:
+The UI needs to be aware of what feature flags are available from Launch Darkly, see the enum in `apps/demo/src/app/app-feature-flags.ts`.
 
-## Generate an application
+- See Demo Component feature consumption: `apps/demo/src/app/launch-darkly-ui`.
 
-Run `ng g @nrwl/angular:app my-app` to generate an application.
+### NgRX Feature Store
 
-> You can use any of the plugins above to generate applications as well.
+- See Store at `libs/web-platform/data-access/src/lib/launch-darkly`.
 
-When using Nx, you can create multiple applications and libraries in the same workspace.
+The feature store is located in a reusable Nx library, allowing multiple angular applications to use the same architecture with minimal install - `apps/demo/src/app/app.module.ts:27` - by adding 
+`LaunchDarklyStoreModule` to the app.module.ts.
 
-## Generate a library
+### NgRX Feature Effect
 
-Run `ng g @nrwl/angular:lib my-lib` to generate a library.
+- See Effect at `libs/web-platform/data-access/src/lib/launch-darkly/launch-darkly.effects.ts:62`.
 
-> You can also use any of the plugins above to generate libraries as well.
+The feature effect wraps the Launch Darkly Client SDK ( `launchdarkly-js-client-sdk` ). The effect self-initializes with the `ngrxOnInitEffects` hook, then initializing the Launch Darkly SDK.
 
-Libraries are shareable across libraries and applications. They can be imported from `@launch-darkly/mylib`.
-
-## Development server
-
-Run `ng serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng g component my-component --project=my-app` to generate a new component.
-
-## Build
-
-Run `ng build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test my-app` to execute the unit tests via [Jest](https://jestjs.io).
-
-Run `nx affected:test` to execute the unit tests affected by a change.
-
-## Running end-to-end tests
-
-Run `ng e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
-
-Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
-
-## Understand your workspace
-
-Run `nx graph` to see a diagram of the dependencies of your projects.
-
-## Further help
-
-Visit the [Nx Documentation](https://nx.dev/angular) to learn more.
-
-
-
-
-
-
-## ☁ Nx Cloud
-
-### Distributed Computation Caching & Distributed Task Execution
-
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-cloud-card.png"></p>
-
-Nx Cloud pairs with Nx in order to enable you to build and test code more rapidly, by up to 10 times. Even teams that are new to Nx can connect to Nx Cloud and start saving time instantly.
-
-Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
-
-Visit [Nx Cloud](https://nx.app/) to learn more.

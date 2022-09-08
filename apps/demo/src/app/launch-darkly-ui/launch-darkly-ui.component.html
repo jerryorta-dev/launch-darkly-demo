@@ -3,7 +3,9 @@
   <mat-card-content> This card has NO feature flag. </mat-card-content>
 </mat-card>
 
-<mat-card *ngIf="showBooleanFlag$ | ngrxPush" class="boolean-flag">
-  <mat-card-title>Boolean Feature flag</mat-card-title>
-  <mat-card-content>Toggled ON in Launch Darkly</mat-card-content>
-</mat-card>
+<ng-container *ngIf="showBooleanFlag$ | ngrxPush">
+  <mat-card class="boolean-flag">
+    <mat-card-title>Boolean Feature flag</mat-card-title>
+    <mat-card-content>Toggled ON in Launch Darkly</mat-card-content>
+  </mat-card>
+</ng-container>

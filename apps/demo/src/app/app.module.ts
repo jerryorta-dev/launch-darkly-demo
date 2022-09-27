@@ -46,6 +46,10 @@ import { LaunchDarklyUiModule } from './launch-darkly-ui/launch-darkly-ui.module
       provide: LaunchDarklyClientIDToken,
       useValue: environment.launchDarklyClientID,
     },
+    {
+      provide: 'FLAGS',
+      useValue: [],
+    },
   ],
   bootstrap: [AppComponent],
 })
